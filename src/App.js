@@ -5,12 +5,14 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Todo from './components/Todo';
 // import About from './components/About';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import LoadingBar from 'react-top-loading-bar'
+import Alert from './components/Alert';
 
 function App() {
   const [mode, setMode] = useState("light")
   const [progress, setProgress] = useState(0)
+  const [alert, setAlert] = useState(null)
 
   let inItTodo;
   if (localStorage.getItem('todos') === null) {
@@ -22,7 +24,7 @@ function App() {
   // const [todos, setTodos] = useState(inItTodo);
 
   const onDelete = (todo) => {
-    console.log("on Delete", todo)
+    // console.log("on Delete", todo)
     setTodos(todos.filter((element) => {
       return element !== todo;
     }))
@@ -30,7 +32,7 @@ function App() {
   }
 
   const addTodo = (title, description) => {
-    console.log(title, description)
+    // console.log(title, description)
     let sno;
     if (todos.length === 0)
       sno = 0;
@@ -42,7 +44,7 @@ function App() {
       title: title,
       description: description,
     }
-    console.log(myTodo)
+    // console.log(myTodo)
     setTodos([...todos, myTodo])
 
     // localStorage.setItem('todos', JSON.stringify(todos))
@@ -61,15 +63,26 @@ function App() {
     else {
       setMode('light')
       document.body.style.backgroundColor = 'white';
-      document.body.style.color ='black'
+      document.body.style.color = 'black'
     }
   }
+
+  const showAlert = (type, message) => {
+    setAlert({
+      type, message
+    })
+    setTimeout(() => {
+      setAlert(null)
+    }, 3000);
+  }
+
   return (
     <>
       <LoadingBar color='#f11946' progress={progress} />
       <Navbar title={"ToDo List"} mode={mode} toggleDarkMode={toggleDarkMode} />
-      <AddTodo addTodo={addTodo} setProgress={setProgress} mode={mode}/>
-      <Todo todos={todos} onDelete={onDelete} mode={mode}/>
+      <Alert alert={alert} />
+      <AddTodo addTodo={addTodo} setProgress={setProgress} mode={mode} showAlert={showAlert} />
+      <Todo todos={todos} onDelete={onDelete} mode={mode} />
       <Footer mode={mode} />
     </>
   );

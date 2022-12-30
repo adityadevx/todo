@@ -9,11 +9,13 @@ function AddTodo(props) {
     const onSubmit = (e) => {
         e.preventDefault();
         if (!title || !description) {
-            alert("Please enter a valid title or description")
-            console.log(title, description)
+            // alert("Please enter a valid title or description")
+            // console.log(title, description)
+            props.showAlert('danger', 'Title and description cannot be empty')
         }
         else {
             props.addTodo(title, description)
+            props.showAlert('success', 'You have succesfully added a note')
         }
         setTitle("");
         setDescription("")
