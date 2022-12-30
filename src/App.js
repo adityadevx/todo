@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Todo from './components/Todo';
 // import About from './components/About';
-import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar'
 
 function App() {
@@ -54,27 +54,25 @@ function App() {
 
   return (
     <>
-      <Router>
+
       <LoadingBar
         color='#f11946'
         progress={progress}
-       
       />
-        <Navbar title={"ToDo List"} />
-        <Routes>
-          <Route path='/' element={
-            <>
-              <AddTodo addTodo={addTodo} setProgress={setProgress} />
-              <Todo todos={todos} onDelete={onDelete} />
-            </>
-          }
-          />
-         
-       
-        <Route path='/' element={<Footer />}/>
-        
-        </Routes>
-      </Router>
+      <Navbar title={"ToDo List"} />
+
+
+
+      <AddTodo addTodo={addTodo} setProgress={setProgress} />
+      <Todo todos={todos} onDelete={onDelete} />
+
+
+
+
+
+      <Footer />
+
+
     </>
   );
 }
