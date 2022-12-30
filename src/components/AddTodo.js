@@ -9,16 +9,15 @@ function AddTodo(props) {
     const onSubmit = (e) => {
         e.preventDefault();
         if (!title || !description) {
-
             alert("Please enter a valid title or description")
             console.log(title, description)
         }
         else {
             props.addTodo(title, description)
         }
+        setTitle("");
+        setDescription("")
     }
-
-
 
     return (
         <>
@@ -33,14 +32,20 @@ function AddTodo(props) {
                 /></h2>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Title</label>
-                    <input type="text" value={title} onChange={(e) => { setTitle(e.target.value) }} className="form-control" id="title" placeholder="Please give a title" />
+                    <input type="text" onChange={(e) => { setTitle(e.target.value) }} className="form-control" id="title" placeholder="Please give a title" value={title}
+                        style={{ backgroundColor: props.mode === 'dark' ? '#272730' : 'white', color: props.mode === 'dark' ? 'white' : 'black' }}
+                    />
                 </div>
                 {props.setProgress(50)}
+
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Description</label>
-                    <textarea className="form-control" id="description" rows="3" value={description} onChange={(e) => { setDescription(e.target.value) }} ></textarea>
+                    <textarea className="form-control" id="description" rows="3" onChange={(e) => { setDescription(e.target.value) }} value={description} placeholder="Please Enter a Description"
+                        style={{ backgroundColor: props.mode === 'dark' ? '#272730' : 'white', color: props.mode === 'dark' ? 'white' : 'black' }}
+                    ></textarea>
                 </div>
-                <button type="button" className="btn btn-success" id='animateBorder'onClick={onSubmit}>Add Todo</button>
+
+                <button type="button" className="btn btn-success" id='animateBorder' onClick={onSubmit}>Add Todo</button>
             </div>
             {props.setProgress(100)}
         </>

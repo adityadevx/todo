@@ -14,7 +14,7 @@ code {
 
 
 #animateBorder {
-  --border-size: 3px;
+  --border-size: 2px;
   --border-angle: 0turn;
   background-image: conic-gradient(from var(--border-angle),
       #213,

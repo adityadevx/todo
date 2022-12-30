@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoadingBar from 'react-top-loading-bar'
 
 function App() {
-
+  const [mode, setMode] = useState("light")
   const [progress, setProgress] = useState(0)
 
   let inItTodo;
@@ -52,27 +52,25 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos])
 
+  const toggleDarkMode = () => {
+    if (mode === 'light') {
+      document.body.style.backgroundColor = '#272730';
+      document.body.style.color = 'white';
+      setMode('dark')
+    }
+    else {
+      setMode('light')
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color ='black'
+    }
+  }
   return (
     <>
-
-      <LoadingBar
-        color='#f11946'
-        progress={progress}
-      />
-      <Navbar title={"ToDo List"} />
-
-
-
-      <AddTodo addTodo={addTodo} setProgress={setProgress} />
-      <Todo todos={todos} onDelete={onDelete} />
-
-
-
-
-
-      <Footer />
-
-
+      <LoadingBar color='#f11946' progress={progress} />
+      <Navbar title={"ToDo List"} mode={mode} toggleDarkMode={toggleDarkMode} />
+      <AddTodo addTodo={addTodo} setProgress={setProgress} mode={mode}/>
+      <Todo todos={todos} onDelete={onDelete} mode={mode}/>
+      <Footer mode={mode} />
     </>
   );
 }
