@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
 
 
 const Navbar = (props) => {
+    const handlePage = (e) => {
+        e.preventDefault();
+        location.href='https://caringcoder.github.io/about';
+    }
     return (
         <><nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -17,7 +21,7 @@ const Navbar = (props) => {
                             <a className="nav-link " aria-current="page" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/about">About</a>
+                            <a className="nav-link" href="/about" onClick={handlePage}>About</a>
                         </li>
 
                     </ul>
