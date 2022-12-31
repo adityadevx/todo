@@ -5,16 +5,15 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Todo from './components/Todo';
 // import About from './components/About';
-
 import LoadingBar from 'react-top-loading-bar'
 import Alert from './components/Alert';
-import NightModeAlert from './components/NightModeAlert';
+
 
 function App() {
   const [mode, setMode] = useState("light")
   const [progress, setProgress] = useState(0)
   const [alert, setAlert] = useState(null)
-  const [nightMode, setNightMode] = useState(null)
+  
 
   let inItTodo;
   if (localStorage.getItem('todos') === null) {
@@ -54,12 +53,7 @@ function App() {
   const [todos, setTodos] = useState(inItTodo);
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-    
-    //Alert for NightMode Available option
-    setNightMode({message : 'Night Mode is now available - Try It Out!'})
-    setTimeout(() => {
-      setNightMode(null)
-    }, 5000);
+
   }, [todos])
 
   const toggleDarkMode = () => {
@@ -84,13 +78,13 @@ function App() {
     }, 3000);
   }
 
-
   return (
     <>
       <LoadingBar color='#f11946' progress={progress} />
       <Navbar title={"ToDo List"} mode={mode} toggleDarkMode={toggleDarkMode} />
       <Alert alert={alert} />
-      <NightModeAlert nightMode={nightMode}/>
+      {/* <NightModeAlert nightMode={nightMode} /> */}
+      
       <AddTodo addTodo={addTodo} setProgress={setProgress} mode={mode} showAlert={showAlert} />
       <Todo todos={todos} onDelete={onDelete} mode={mode} />
       <Footer mode={mode} />
