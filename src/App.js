@@ -4,7 +4,6 @@ import AddTodo from './components/AddTodo';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Todo from './components/Todo';
-// import About from './components/About';
 import LoadingBar from 'react-top-loading-bar'
 import Alert from './components/Alert';
 
